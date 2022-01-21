@@ -3,15 +3,6 @@ const express = require('express')
 const Tasks = require('./model')
 const router = express.Router()
 
-// router.get('/', async (req,res,next) =>{
-//     try{
-//         const task = await Tasks.getAll()
-//         res.json(task)
-//     } catch(err){
-//         next(err)
-//     }
-// })
-
 router.get('/', (req,res,next) =>{
     Tasks.get()
         .then(task =>{
@@ -28,7 +19,5 @@ router.get('/', (req,res,next) =>{
      next(err)
    }
   });
-
-  
 
 module.exports = router;

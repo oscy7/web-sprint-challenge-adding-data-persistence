@@ -3,7 +3,7 @@ exports.up = async function(knex) {
         .createTable('projects', table=> {
             table.increments('project_id')
             table.string('project_name', 128).notNullable().unique()
-            table.boolean('project_completed').defaultTo(0)
+            table.boolean('project_completed').defaultTo(false)
             table.string('project_description',128).defaultTo('null')
         })
         .createTable('resources', table =>{
@@ -13,9 +13,9 @@ exports.up = async function(knex) {
         })
         .createTable('tasks', table =>{
             table.increments('task_id')
-            table.string('task_description')
-            table.boolean('task_completed').defaultTo(0)
-            table.string('task_notes')
+            table.string('task_description', 128)
+            table.boolean('task_completed').defaultTo(false)
+            table.string('task_notes', 128)
             table.integer('project_id')
             .unsigned()
             .notNullable()
@@ -39,9 +39,7 @@ exports.up = async function(knex) {
                 .references('resource_id')
                 .inTable('resources')
                 .onDelete('RESTRICT')
-                .onUpdate('RESTRICT')
-            table.string('Total').notNullable()
-
+                 .onUpdate('RESTRICT')
         })
 };
 
