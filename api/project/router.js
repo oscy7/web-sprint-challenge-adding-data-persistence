@@ -5,9 +5,9 @@ const router = express.Router()
 
 
 router.get('/', (req,res,next) =>{
-    Proj.getAll()
+    Proj.get()
         .then(projects =>{
-            res.json(projects)
+            res.status(200).json(projects)
         })
         .catch(next)
 })
@@ -15,7 +15,7 @@ router.get('/', (req,res,next) =>{
 router.post('/', async (req, res, next) => { 
    try{
      const postProj = await Proj.postProj(req.body)
-      res.json(postProj)
+      res.status(201).json(postProj)
    } catch(err){
      next(err)
    }
