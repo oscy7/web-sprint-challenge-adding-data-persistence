@@ -10,15 +10,15 @@ server.use('/api/projects',projectRouter)
 server.use('/api/tasks',tasksRouter)
 server.use('/api/resource',resourceRouter)
 
-server.use('*', (req,res, next) => {
-    next({status:404, message:'not found'})
-})
+// server.use('*', (req,res, next) => {
+//     next({status:404, message:'not found'})
+// })
 
-server.use((err,req,res,next) => {
-    res.status(err.status || 400).json({
-        message: err.message
-    })
-})
+// server.use((err,req,res,next) => {
+//     res.status(err.status || 400).json({
+//         message: err.message
+//     })
+// })
 
 
 module.exports = server 

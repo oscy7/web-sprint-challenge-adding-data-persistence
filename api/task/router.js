@@ -2,15 +2,10 @@
 const express = require('express')
 const Tasks = require('./model')
 const router = express.Router()
-router.use('*', (req, res, next)=>{
-    res.json({
-        message: 'hello'
-    })
-})
 
-router.get('/task', async (req,res,next) =>{
+router.get('/', async (req,res,next) =>{
     try{
-        const task = await Tasks.getAll()
+        const task = await Tasks.get()
         res.json(task)
     } catch(err){
         next(err)

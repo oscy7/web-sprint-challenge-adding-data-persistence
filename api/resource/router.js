@@ -2,23 +2,22 @@
 const express = require('express')
 const Resource = require('./model')
 const router = express.Router()
-router.use('*', (req, res, next)=>{
-    res.json({
-        message: 'hello'
-    })
+
+
+router.get('/', (req,res,next) =>{
+    Resource.getAll()
+        .then(resource =>{
+            res.json(resource)
+        })
+        .catch(next)
 })
 
-router.get('/resources', async (req,res,next) =>{
-    try{
-        const resource = await Resource.getAll()
-        res.json(resource)
-    } catch(err){
-        next(err)
-    }
+router.post('/', (req,res,next) =>{
+    Resource.create(req.body)
+        .then(resource => {
+            res.status(200).json(resource)
+        })
+        .catch(next)
 })
-
-// router.post('/resource', (req,res,next) =>{
-
-// })
 
 module.exports = router;

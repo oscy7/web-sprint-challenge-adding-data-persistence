@@ -3,22 +3,22 @@ const express = require('express')
 const Proj = require('./model')
 const router = express.Router()
 
-router.use('*', (req, res, next)=>{
-    res.json({
-        message: 'hello'
-    })
-})
 
-router.get('/projects', (req,res,next) =>{
-    Proj.find()
+router.get('/', (req,res,next) =>{
+    Proj.getAll()
         .then(projects =>{
             res.json(projects)
         })
         .catch(next)
 })
 
-// router.post('/projects', (req,res,next) =>{
-
-// })
+router.post('/', async (req, res, next) => { 
+   try{
+     const postProj = await Proj.postProj(req.body)
+      res.json(postProj)
+   } catch(err){
+     next(err)
+   }
+  });
 
 module.exports = router;
