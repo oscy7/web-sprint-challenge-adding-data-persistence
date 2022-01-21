@@ -21,8 +21,8 @@ exports.up = async function(knex) {
             .notNullable()
             .references('project_id')
             .inTable('projects')
-            .onDelete('RESTRICT')
-            .onUpdate('RESTRICT')
+            .onDelete('CASCADE')
+            .onUpdate('CASCADE')
         })
         .createTable('project_resources', table =>{
             table.increments('project_resource_id')
@@ -31,17 +31,16 @@ exports.up = async function(knex) {
                 .notNullable()
                 .references('project_id')
                 .inTable('projects')
-                .onDelete('RESTRICT')
-                .onUpdate('RESTRICT')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE')
             table.integer('resource_id')
                 .unsigned()
                 .notNullable()
                 .references('resource_id')
                 .inTable('resources')
-                .onDelete('RESTRICT')
-                .onUpdate('RESTRICT')
+                .onDelete('CASCADE')
+                .onUpdate('CASCADE')
         })
-
 };
 
 exports.down = async function(knex) {
