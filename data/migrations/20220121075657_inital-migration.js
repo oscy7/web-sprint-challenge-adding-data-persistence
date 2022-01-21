@@ -39,8 +39,10 @@ exports.up = async function(knex) {
                 .references('resource_id')
                 .inTable('resources')
                 .onDelete('RESTRICT')
-                 .onUpdate('RESTRICT')
+                .onUpdate('RESTRICT')
+            table.string('hello')
         })
+
 };
 
 exports.down = async function(knex) {
