@@ -1,6 +1,6 @@
 // build your `/api/tasks` router here
 const express = require('express')
-const helpers = require('./model')
+const Tasks = require('./model')
 const router = express.Router()
 router.use('*', (req, res, next)=>{
     res.json({
@@ -8,9 +8,14 @@ router.use('*', (req, res, next)=>{
     })
 })
 
-// router.get('/tasks', (req,res,next) =>{
-    
-// })
+router.get('/task', async (req,res,next) =>{
+    try{
+        const task = await Tasks.getAll()
+        res.json(task)
+    } catch(err){
+        next(err)
+    }
+})
 
 // router.post('/tasks', (req,res,next) =>{
 
